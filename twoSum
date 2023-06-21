@@ -1,0 +1,32 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+
+      Map<Integer,Integer> targMap = new HashMap<>();
+      int len = nums.length;
+
+      for (int i = 0 ; i < len ; i++)
+      {
+          // This allows us to create a mapping with the 
+          // array values and with having the original indexes as keys 
+          // it is held together since typically hashmap doesn't maintain order when adding in
+          targMap.put(nums[i],i);
+      }
+
+      // now we find the complement
+
+      for(int j = 0 ; j < len ; j++)
+      {
+          // so here we are going to be testing each one
+          int complement = target-nums[j];
+
+          // here the != part ensures that we don't take the same element twice and consider it as a valid pair ie 6 + 6 is 12 but only one 6 in the array
+          if(targMap.containsKey(complement) && targMap.get(complement) != j)
+          {
+              return new int[] {j,targMap.get(complement)};
+          }
+      }
+      // This case should never happen as the problem guarentees that there is always a solution
+      return new int[]{};
+    
+    }
+}
